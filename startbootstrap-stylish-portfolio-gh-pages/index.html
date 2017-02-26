@@ -2,7 +2,36 @@
 <html lang="en">
 
 <head>
+  <meta name="google-signin-scope" content="profile email">
+  <meta name="google-signin-client_id" content="846138427166-sbgqmlhdp6q4umt7pe72sqp07dsronfn.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer >
+    
+     </script>
+  
+  <body>
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <script>
+      function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
 
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+      };
+      
+    </script>
+
+  </body>
+  <div id="signin"> </div>
+  
+   
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,7 +78,8 @@ input[type=text]:focus {
 }
 </style>
 
-</head>
+
+  
 
 <body>
 
@@ -64,6 +94,9 @@ input[type=text]:focus {
             <li>
                 <a href="#top" onclick=$("#menu-close").click();>Home</a>
             </li>
+          <li>
+            <a href="#account" onclick=$().click();>Account</a>
+          </li>
             <li>
                 <a href="#about" onclick=$("#menu-close").click();>Volunteer Opportunities Near You</a>
             </li>
@@ -83,12 +116,24 @@ input[type=text]:focus {
             <h1>I'm Down</h1>
             <h3>A Way to Manage Your Volunteer Time</h3>
             <br>
-            <a href="#about" class="btn btn-dark btn-lg">Find Out More</a>
+          <a href="#g-signin2" class="btn"><img src="google_signin_buttons/web/1x/btn_google_signin_dark_focus_web.png" hspace="150" style="width:150px;height:35px;"> </a>
+          
+         
         </div>
+       
+      <a href="#" onclick="signOut();">Sign out</a>
+      <script>
+        function signOut() {
+          var auth2 = gapi.auth2.getAuthInstance();
+          auth2.signOut().then(function () {
+            console.log('User signed out.');
+          });
+        }
+      </script>
     </header>
 
     <!-- About -->
-    <section id="about" class="about">
+    <section id="signup" class="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -101,7 +146,15 @@ input[type=text]:focus {
             <!-- /.row -->
         </div>
         <!-- /.container -->
-    </section>
+    
+      
+      <section id="account" class="account">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h2>Account</h2>
+            </div></div>
+      
 
     <!-- Services -->
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
@@ -287,5 +340,5 @@ input[type=text]:focus {
     </script>
 
 </body>
-
+  
 </html>
